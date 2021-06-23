@@ -242,7 +242,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -288,7 +288,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -334,7 +334,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -381,7 +381,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -427,7 +427,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -473,7 +473,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -520,7 +520,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -566,7 +566,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -612,7 +612,7 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary btn-hide"
+                        class="btn btn-sm btn-outline-secondary"
                       >
                         Hide
                       </button>
@@ -655,30 +655,50 @@
         .then((arr) => {
           const cards = document.querySelectorAll(".changeMins");
           console.log("after", cards);
-          for (let i = 0; i < arr.photos.length; i++) {
+          for (let i = 0; i < cards.length; i++) {
             cards[i].innerText = arr.photos[i].id;
           }
         });
 
-      //   function firstBtn() {
-      //     fetch("https://api.pexels.com/v1/search?query=ireland", {
-      //       method: "GET",
-      //       headers: {
-      //         Authorization:
-      //           "Bearer 563492ad6f91700001000001430611e6a3a84aebb4d8269c4443b534",
-      //       },
-      //     })
-      //       .then((resp) => resp.json())
-      //       .then((arr) => {
-      //         const cards = document.querySelector(".card");
-      //         console.log("after", cards);
-      //         for (let i = 0; i < arr.photos.length; i++) {
-      //           let imgPhoto = document.createElement("img");
-      //           imgPhoto.src = arr.photos[i].src;
-      //           cards.appendChild(imgPhoto);
-      //         }
-      //       });
-      //   }
+      function firstBtn() {
+        fetch("https://api.pexels.com/v1/search?query=ireland", {
+          method: "GET",
+          headers: {
+            Authorization:
+              "Bearer 563492ad6f91700001000001430611e6a3a84aebb4d8269c4443b534",
+          },
+        })
+          .then((resp) => resp.json())
+          .then((arr) => {
+            const cards = document.querySelectorAll(".card");
+            const svg = document.querySelectorAll(".card svg");
+            for (let i = 0; i < cards.length; i++) {
+              svg[i].remove();
+              cards[i].insertAdjacentHTML(
+                "beforebegin",
+                `<img src="${arr.photos[i].src.small}" class="card-img-top" />`
+              );
+            }
+          });
+      }
+
+      let getBtnHide = document.querySelectorAll("button");
+      let searchText = "Hide";
+
+      for (let i = 0; i < getBtnHide.length; i++) {
+        if (getBtnHide[i].innerText === searchText) {
+          getBtnHide[i].classList.add("btn-hide");
+        }
+      }
+
+      let getClick = document.querySelectorAll(".btn-hide");
+      for (let i = 0; i < getClick.length; i++) {
+        getClick[i].addEventListener("click", function () {
+          event.currentTarget.parentNode.offsetParent.parentNode.classList.add(
+            "d-none"
+          );
+        });
+      }
     </script>
 
     <script
